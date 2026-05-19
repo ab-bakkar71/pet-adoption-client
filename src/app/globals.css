@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+
+@theme {
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+}
