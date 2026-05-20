@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { IoMdPaw } from 'react-icons/io';
 import NavLink from './NavLink';
-import { Button, Switch } from '@heroui/react';
+import { Button } from '@heroui/react';
 import ThemToggle from './ThemToggle';
 
 const NavBar = () => {

@@ -1,4 +1,5 @@
 import Counter from "@/components/Counter";
+import FaqSection from "@/components/FaqSection";
 import Hero from "@/components/Hero";
 import PetCareTips from "@/components/PetCareTips";
 import SuccessStories from "@/components/SuccessStories";
@@ -12,6 +13,7 @@ export default function Home() {
     <WhyAdopt/>
     <SuccessStories/>
     <PetCareTips/>
+    <FaqSection/>
     </>
   );
 }
