@@ -9,8 +9,8 @@ import ThemToggle from './ThemToggle';
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
-        <nav className='border-b border-separator bg-background/70 backdrop-blur-lg'>
-            <div className="sticky top-0 z-40 w-full container mx-auto">
+        <nav className='border-b border-separator bg-background/70 backdrop-blur-lg sticky top-0 z-40'>
+            <div className="top-0 z-40 w-full container mx-auto ">
 
                 <header className="flex h-16 items-center justify-between px-6">
                     <div className="flex items-center gap-4">
