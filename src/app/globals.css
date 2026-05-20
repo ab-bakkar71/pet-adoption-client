@@ -5,3 +5,9 @@
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 
 }
+
+:root {
+  /* Override any color variable */
+  --accent: oklch(0.7 0.25 260);
+  --success: oklch(0.65 0.15 155);
+}

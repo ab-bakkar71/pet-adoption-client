@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { IoMdPaw } from 'react-icons/io';
 import NavLink from './NavLink';
 import { Button, Switch } from '@heroui/react';
+import ThemToggle from './ThemToggle';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,11 +57,8 @@ const NavBar = () => {
                         <Button variant="outline" color="success" size="sm" className='ml-2'>Sign Up</Button>
 
                         <div>
-                            <Switch defaultSelected>
-                            <Switch.Control>
-                                <Switch.Thumb />
-                            </Switch.Control>
-                        </Switch>
+                           <ThemToggle/>
+                       
                         </div>
                     </div>
                     
