@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-import { FaPhoneAlt } from 'react-icons/fa';
+import { FaFacebookF, FaGithub, FaLinkedin, FaPhoneAlt,} from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { IoMdMail, IoMdPaw } from 'react-icons/io';
 import { MdAddLocation } from 'react-icons/md';
 
@@ -18,12 +19,28 @@ const Footer = () => {
                 </div>
                 <div className="flex-1 flex items-start md:justify-end gap-20">
                     <div>
-                        <h2 className="font-semibold mb-5 dark:text-white text-gray-800">Company</h2>
-                        <ul className="text-sm space-y-2">
-                            <li><Link href="/">Home</Link></li>
-                            <li><Link href="#">About us</Link></li>
-                            <li><Link href="#">Contact us</Link></li>
-                            <li><Link href="#">Privacy policy</Link></li>
+                        <h2 className="font-semibold mb-5 dark:text-white text-gray-800">Social Links</h2>
+                        <ul className="text-2xl flex-row space-x-2">
+                            <li>
+                                <Link href="https://www.facebook.com/Ab.Bakkar420" target="_blank" rel="noopener noreferrer">
+                                    <FaFacebookF />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="https://github.com/ab-bakkar71" target="_blank" rel="noopener noreferrer">
+                                    <FaGithub />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="https://www.linkedin.com/in/ab-bakkar71/" target="_blank" rel="noopener noreferrer">
+                                    <FaLinkedin />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="https://twitter.com/ab_bakkar71" target="_blank" rel="noopener noreferrer">
+                                    <FaXTwitter />
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <div>
