@@ -6,12 +6,14 @@ const AllPetsPage = async () => {
     const pets = await getPets();
     
     return (
-        <div className='container mx-auto px-4 py-8'>
-            <h1 className='text-3xl font-bold mb-6'>All Pets</h1>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+        <div>
+            <h1 className='container mx-auto text-3xl font-bold my-6'>All Pets</h1>
+          <div className='bg-gray-50 dark:bg-slate-900 py-8'>
+            <div className='container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
             {
                 pets.map(pet => <PetCard key= {pet._id} pet={pet} />)
             }
+          </div>
           </div>
         </div>
     );
