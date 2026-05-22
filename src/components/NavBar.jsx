@@ -53,8 +53,12 @@ const NavBar = () => {
                         </li>
                     </ul>
                     <div className="hidden md:flex items-center gap-2">
+                        <Link href='/signin'>
                         <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
+                        </Link>
+                        <Link href='/signup'>
                         <Button variant="outline" className="bg-green-500 text-white hover:bg-green-600" size="sm" >Sign Up</Button>
+                        </Link>
 
                         <div>
                            <ThemToggle/>
@@ -69,8 +73,12 @@ const NavBar = () => {
                             <NavLink />
                         </ul>
                         <div className="my-2 px-4">
-                            <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
-                            <Button variant="outline" className="bg-green-500 text-white hover:bg-green-600" size="sm" >Sign Up</Button>
+                        <Link href='/signin'> 
+                        <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
+                        </Link>
+                        <Link href='/signup'>
+                        <Button variant="outline" className="bg-green-500 text-white hover:bg-green-600" size="sm" >Sign Up</Button>
+                        </Link>
                         </div>
                     </div>
                 )}

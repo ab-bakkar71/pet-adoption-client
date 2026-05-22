@@ -1,5 +1,7 @@
 import { ArrowRight, Heart } from '@gravity-ui/icons';
 import React from 'react';
+import 'animate.css';
+import Link from 'next/link';
 
 
 const Hero = () => {
@@ -12,7 +14,7 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          <div className="space-y-6 text-center lg:text-left z-10">
+          <div className="space-y-6 text-center lg:text-left z-10 animate__fadeInLeft animate__animated animate__slower">
             <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide">
               <Heart size={16} className="fill-orange-600 stroke-orange-600 animate-pulse" />
               Give Them a Forever Home
@@ -33,16 +35,16 @@ const Hero = () => {
 
             
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <button className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-orange-200 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer">
+              <Link href="/adopt" className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-orange-200 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer">
                 Adopt Now
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
               
             </div>
           </div>
 
    
-          <div className="relative flex justify-center items-center">
+          <div className="relative flex justify-center items-center animate__fadeInRight animate__animated animate__slower">
         
             <div className="absolute inset-0 bg-linear-to-tr from-orange-400 to-amber-300 rounded-3xl transform rotate-3 scale-102 opacity-20" />
             

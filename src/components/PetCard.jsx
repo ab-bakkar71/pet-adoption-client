@@ -4,9 +4,10 @@ import Link from 'next/link';
 import React from 'react';
 import { BiSolidLocationPlus } from 'react-icons/bi';
 import { TbCurrencyTaka } from 'react-icons/tb';
+import 'animate.css';
 
 const PetCard = ({ pet }) => {
-  const { petName, age, breed, location, gender, imageUrl, adoptionFee } = pet;
+  const { petName, age, breed, location, gender, imageUrl, adoptionFee, _id} = pet;
   return (
     <Card className='dark:bg-slate-800 rounded-md ' variant="secondary">
       <div className='relative w-full aspect-square'>
@@ -42,7 +43,7 @@ const PetCard = ({ pet }) => {
       </Card.Content>
 
       <Card.Footer className='flex justify-between gap-2'>
-        <Link href='#' className='px-4 py-2 bg-transparent border border-gray-300 font-medium text-black dark:text-white rounded-md hover:bg-gray-300 hover:dark:bg-gray-600 hover:scale-105 transition'>View Details</Link>
+        <Link href={`/pets/${_id}`} className='px-4 py-2 bg-transparent border border-gray-300 font-medium text-black dark:text-white rounded-md hover:bg-gray-300 hover:dark:bg-gray-600 hover:scale-105 transition'>View Details</Link>
         <Link href='#' className='px-4 py-2 bg-green-500 text-white font-medium rounded-md hover:bg-green-600  hover:scale-105 transition'>Adopt Me</Link>
       </Card.Footer>
     </Card>

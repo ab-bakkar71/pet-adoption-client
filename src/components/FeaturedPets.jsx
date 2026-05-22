@@ -1,7 +1,9 @@
-import { getPets } from '@/app/lib/data';
 import React from 'react';
 import PetCard from './PetCard';
 import Link from 'next/link';
+import 'animate.css';
+import { getPets } from '@/lib/data';
+
 
 const FeaturedPets = async () => {
      const allPets = await getPets();
@@ -10,7 +12,7 @@ const FeaturedPets = async () => {
         <section className='bg-gray-50 dark:bg-slate-900 py-8'>
             <div className='container mx-auto mb-6'>
                 <h2 className='text-2xl font-bold mb-4'>Featured Pets</h2>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate__animated animate__fadeInUp'>
                     {
                         pets.map(pet => <PetCard key={pet._id} pet={pet}  ></PetCard>)
                     }
