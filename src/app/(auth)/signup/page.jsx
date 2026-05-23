@@ -36,6 +36,13 @@ const SingUpPage = () => {
             toast.success('Registration successful ✅')
         }
     }
+
+
+    const handleGoogleSignIn = async () => {
+       await authClient.signIn.social({
+            provider: "google",
+        });
+    };
     return (
         <>
         <section className='bg-gray-50 dark:bg-slate-900 py-12'>
@@ -116,7 +123,7 @@ const SingUpPage = () => {
                                 Create Account
                             </Button>
 
-                            <Button className="w-full" variant="tertiary">
+                            <Button className="w-full" variant="tertiary" onClick={handleGoogleSignIn}>
                                 <Icon icon="devicon:google" />
                                 Sign in with Google
                             </Button>
@@ -124,7 +131,7 @@ const SingUpPage = () => {
                     </Form>
 
                     <p className="text-center mt-6 text-sm">
-                        Already have an account? <Link href="/login" className="text-blue-500 underline">Login</Link>
+                        Already have an account? <Link href="/signin" className="text-blue-500 underline">Login</Link>
                     </p>
                 </div>
             </div>

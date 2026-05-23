@@ -3,10 +3,24 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { IoMdPaw } from 'react-icons/io';
 import NavLink from './NavLink';
-import { Button } from '@heroui/react';
+import { Avatar, Button } from '@heroui/react';
 import ThemToggle from './ThemToggle';
+import { authClient } from '@/lib/auth-client';
 
 const NavBar = () => {
+    // get user
+    const userinfo = authClient.useSession();
+    const user = userinfo?.data?.user;
+
+
+    // logout handler
+    const handelLogOut = async()=>{
+        await authClient.signOut();
+
+    }
+
+
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
         <nav className='border-b border-separator bg-background/70 backdrop-blur-lg sticky top-0 z-40'>
@@ -53,32 +67,66 @@ const NavBar = () => {
                         </li>
                     </ul>
                     <div className="hidden md:flex items-center gap-2">
-                        <Link href='/signin'>
-                        <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
-                        </Link>
-                        <Link href='/signup'>
-                        <Button variant="outline" className="bg-green-500 text-white hover:bg-green-600" size="sm" >Sign Up</Button>
-                        </Link>
+                        {
+                            !user && <div className='hidden md:flex items-center gap-2'>
+                            <Link href='/signin'>
+                                <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
+                            </Link>
+                            <Link href='/signup'>
+                                <Button variant="outline" className="bg-green-500 text-white hover:bg-green-600" size="sm" >Sign Up</Button>
+                            </Link>
+                        </div>
+                        }
+
+                        {
+                            user && <div className='hidden gap-2 md:flex'>
+                                <Avatar size='md'>
+                                    <Avatar.Image
+                                        alt={user?.name}
+                                        src={user?.image}
+                                        referrerPolicy='no-referrer' />
+                                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                                </Avatar>
+                                <Button onClick={handelLogOut} size='md' variant='danger'>Log Out</Button>
+                            </div>
+                        }
 
                         <div>
-                           <ThemToggle/>
-                       
+                            <ThemToggle />
+
                         </div>
                     </div>
-                    
+
                 </header>
                 {isMenuOpen && (
                     <div className="border-t border-separator md:hidden">
                         <ul className="flex flex-col gap-2 p-4">
                             <NavLink />
                         </ul>
-                        <div className="my-2 px-4">
-                        <Link href='/signin'> 
-                        <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
-                        </Link>
-                        <Link href='/signup'>
-                        <Button variant="outline" className="bg-green-500 text-white hover:bg-green-600" size="sm" >Sign Up</Button>
-                        </Link>
+                        <div className="my-2 px-4 space-x-2">
+                            {
+                                user && <div className='hidden gap-2 md:flex'>
+                                <Avatar size='md'>
+                                    <Avatar.Image
+                                        alt={user?.name}
+                                        src={user?.image}
+                                        referrerPolicy='no-referrer' />
+                                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                                </Avatar>
+                                <Button onClick={handelLogOut} size='md' variant='danger'>Log Out</Button>
+                            </div>
+                            }
+
+                            {
+                                !user && <div className='hidden md:flex items-center gap-2'>
+                            <Link href='/signin'>
+                                <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
+                            </Link>
+                            <Link href='/signup'>
+                                <Button variant="outline" className="bg-green-500 text-white hover:bg-green-600" size="sm" >Sign Up</Button>
+                            </Link>
+                        </div>
+                            }
                         </div>
                     </div>
                 )}

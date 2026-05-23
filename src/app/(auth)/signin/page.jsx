@@ -26,14 +26,19 @@ const singInPage = () => {
         if (data) {
             toast.success("Login successful!")
         }
-
-
     }
+
+    const handleGoogleSignIn = async () => {
+       await authClient.signIn.social({
+            provider: "google",
+           
+        });
+    };
 
     return (
         <section className='bg-gray-50 dark:bg-slate-900 py-12'>
             <div className='max-w-lg mx-auto min-h-[80vh] flex justify-center items-center p-4 '>
-                <div className='w-full max-w-md p-6 sm:p-10 md:p-16 border shadow-sm rounded-lg dark:bg-slate-900'>
+                <div className='w-full max-w-md p-6 sm:p-10 md:p-16 border shadow-sm rounded-lg '>
                     <h1 className="text-center mb-4 text-2xl font-bold">Sign in</h1>
 
                     <Form className="flex flex-col gap-4" onSubmit={handleLogin}>
@@ -77,7 +82,7 @@ const singInPage = () => {
                             </Button>
 
                             {/* google sign in btn */}
-                            <Button className="w-full" variant="tertiary">
+                            <Button className="w-full" variant="tertiary" onClick={handleGoogleSignIn}>
                                 <Icon icon="devicon:google" />
                                 Sign in with Google
                             </Button>
@@ -85,7 +90,7 @@ const singInPage = () => {
                     </Form>
 
                     <p className="text-center mt-6 text-sm">
-                        Don't have an account? <Link href="/signup" className="text-blue-500 underline">Register</Link>
+                        Don't have an account? <Link href="/signup" className="text-blue-500 underline">Sign Up</Link>
                     </p>
                 </div>
             </div>

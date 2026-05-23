@@ -6,6 +6,9 @@
 
 }
 
+@source "../app/**/*.{js,jsx,ts,tsx}";
+@source "../components/**/*.{js,jsx,ts,tsx}";
+
 :root {
   /* Override any color variable */
   --accent: oklch(0.7 0.25 260);
