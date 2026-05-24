@@ -44,7 +44,12 @@ const PetIdPage = async ({ params }) => {
                             <span>{pet.adoptionFee}</span>
                             <span className='text-sm text-gray-500 dark:text-gray-400 ml-1'>Adoption Fee</span>
                         </div>
-                        <h1></h1>
+                        <div className="flex items-center gap-1 mt-1 pt-1 border-t border-slate-100 dark:border-slate-800/60">
+                            <p className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                                Adopted By:
+                            </p>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">{pet.ownerName || "Abu Bakkar"}</span>
+                        </div>
                     </div>
                 </div>
 
@@ -74,27 +79,33 @@ const PetIdPage = async ({ params }) => {
                 </div>
 
                 <div className="flex flex-wrap gap-3 mt-4 my-7">
+
                     {/* Health Status Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors
+                  bg-emerald-50 text-emerald-700 border border-emerald-200 
+                  dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">
                         <HeartPulse size={14} className="stroke-[2.5]" />
                         <span>Health: {pet.healthStatus || "Healthy"}</span>
                     </div>
 
                     {/* Vaccination Status Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50">
-                        <FaSyringe size={14} className="stroke-[2.5]" />
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors
+                  bg-blue-50 text-blue-700 border border-blue-200 
+                  dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/20">
+                        <FaSyringe size={14} />
                         <span>{pet.vaccinationStatus || "Fully Vaccinated"}</span>
                     </div>
+
                 </div>
                 {/* description */}
                 <div>
-                    <p>{pet.description}</p>
+                    <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">{pet.description}</p>
                 </div>
 
                 {/* cta */}
-               <div className="w-full mt-7">
-                 <Button className='w-full bg-[#00bd56]'>Adopt Me</Button>
-               </div>
+                <div className="w-full mt-7">
+                    <Button className='w-full bg-[#00bd56] hover:bg-emerald-600 active:scale-[0.99] text-white font-bold h-12 rounded-xl transition-all shadow-md cursor-pointer text-sm tracking-wide'>Adopt Me</Button>
+                </div>
             </div>
         </section>
     );
