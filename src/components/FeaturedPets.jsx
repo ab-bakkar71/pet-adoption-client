@@ -2,12 +2,14 @@ import React from 'react';
 import PetCard from './PetCard';
 import Link from 'next/link';
 import 'animate.css';
-import { getPets } from '@/lib/data';
+import { featurePet } from '@/lib/data';
 
 
 const FeaturedPets = async () => {
-     const allPets = await getPets();
-     const pets  = allPets.slice(0, 8);
+     const pets = await featurePet();
+
+     
+     
     return (
         <section className='bg-gray-50 dark:bg-slate-900 py-8'>
             <div className='container mx-auto mb-6'>

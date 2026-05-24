@@ -5,9 +5,17 @@ export const getPets = async()=>{
     return data;
 }
 
+ // for feature
+
+ export const featurePet = async()=>{
+    const res= await fetch(`${process.env.PUBLIC_URL}/feature`);
+    const data = await res.json();
+    return data;
+ }
+
 // for get single data
 export const getPetById = async(petId)=>{
-    const res= await fetch(`http://localhost:8000/pets/${petId}`);
+    const res= await fetch(`${process.env.PUBLIC_URL}/pets/${petId}`);
     const data= await res.json();
     return data;
 }

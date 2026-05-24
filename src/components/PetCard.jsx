@@ -43,7 +43,7 @@ const PetCard = ({ pet }) => {
       </Card.Content>
 
       <Card.Footer className='flex justify-between gap-2'>
-        <Link href={`/pets/${_id}`} className='px-4 py-2 bg-transparent border border-gray-300 font-medium text-black dark:text-white rounded-md hover:bg-gray-300 hover:dark:bg-gray-600 hover:scale-105 transition'>View Details</Link>
+        <Link href={`/all-pets/${_id}`} className='px-4 py-2 bg-transparent border border-gray-300 font-medium text-black dark:text-white rounded-md hover:bg-gray-300 hover:dark:bg-gray-600 hover:scale-105 transition'>View Details</Link>
         <Link href='#' className='px-4 py-2 bg-green-500 text-white font-medium rounded-md hover:bg-green-600  hover:scale-105 transition'>Adopt Me</Link>
       </Card.Footer>
     </Card>
