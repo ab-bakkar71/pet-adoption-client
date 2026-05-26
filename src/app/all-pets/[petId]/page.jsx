@@ -1,6 +1,8 @@
+import { auth } from "@/lib/auth";
 import { getPetById } from "@/lib/data";
 import { HeartPulse } from "@gravity-ui/icons";
 import { Button } from "@heroui/react";
+import { headers } from "next/headers";
 import Image from "next/image";
 import { BiSolidLocationPlus } from "react-icons/bi";
 import { FaCalendarAlt, FaSyringe } from "react-icons/fa";
@@ -11,7 +13,15 @@ import { TbCurrencyTaka, TbDna2 } from "react-icons/tb";
 
 const PetIdPage = async ({ params }) => {
     const { petId } = await params;
-    const pet = await getPetById(petId);
+
+
+    const {token} = await auth.api.getToken({
+
+        headers: await headers()
+    });
+
+
+    const pet = await getPetById(petId, token);
 
     return (
         <section className="py-10 bg-gray-50 dark:bg-slate-900 ">

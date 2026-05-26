@@ -14,8 +14,12 @@ export const getPets = async()=>{
  }
 
 // for get single data
-export const getPetById = async(petId)=>{
-    const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`);
+export const getPetById = async(petId, token)=>{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`,{
+        headers: {
+            authorization: `Bearer ${token}` || ""
+        }
+    });
     const data= await res.json();
     return data;
 }
