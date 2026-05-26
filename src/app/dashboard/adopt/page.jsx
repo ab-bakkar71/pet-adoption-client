@@ -1,17 +1,43 @@
 "use client"
 
 
+import { authClient } from '@/lib/auth-client';
 import { Button, Fieldset, Form, Select, Input, Label, ListBox, TextArea, TextField, FieldError } from '@heroui/react';
+
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const adoptPage = () => {
+
+  // get user
+      const userinfo = authClient.useSession();
+      const user = userinfo?.data?.user;
+
+  const onSubmit = async(e)=>{
+      e.preventDefault()
+      const fromData = new FormData(e.currentTarget)
+      const adoptPet = Object.fromEntries(fromData.entries())
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/adopt`,{
+        method: 'post',
+        headers:{
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(adoptPet)
+      })
+      const data =await res.json()
+       if(data.insertedId){
+        toast.success("Pet Added Successful")
+    }
+    return data
+  }
 
 
   return (
     
     <section className='py-12 bg-gray-50 dark:bg-slate-950 min-h-screen flex items-center transition-colors duration-300'>
 
-      <form className="p-6 sm:p-10 space-y-8 max-w-4xl mx-auto w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/60 shadow-xl rounded-2xl transition-all">
+      <form onSubmit={onSubmit} className="p-6 sm:p-10 space-y-8 max-w-4xl mx-auto w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/60 shadow-xl rounded-2xl transition-all">
         
         <div className="text-center mb-2">
           <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Adopt a Pet</h1>
@@ -155,18 +181,33 @@ const adoptPage = () => {
             </TextField>
           </div>
 
-          {/* Owner Email (Auto-filled & Read Only) */}
+          {/* Owner Email */}
           <div className="md:col-span-2 lg:col-span-3">
             <TextField name="ownerEmail" className="flex flex-col gap-1.5">
               <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">Your Email</Label>
               <Input
                 type="email"
-                
+                value={user.email}
                 readOnly
                 className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed outline-hidden"
               />
             </TextField>
           </div>
+
+          {/* owner name */}
+          <div className="md:col-span-2 lg:col-span-3">
+            <TextField name="ownerEmail" className="flex flex-col gap-1.5">
+              <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">O</Label>
+              <Input
+                type="text"
+                value={user.name}
+                readOnly
+                className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed outline-hidden"
+              />
+            </TextField>
+          </div>
+
+
 
         </div>
 

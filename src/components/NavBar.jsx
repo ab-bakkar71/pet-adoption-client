@@ -70,7 +70,7 @@ const NavBar = () => {
                             <NavLink />
                         </li>
                     </ul>
-                    <div className="hidden md:flex items-center gap-2">
+                    <div className=" md:flex items-center gap-2">
                         {
                             !user && <div className='hidden md:flex items-center gap-2'>
                                 <Link href='/signin'>
@@ -102,16 +102,16 @@ const NavBar = () => {
                                     <Link href="/dashboard" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
                                         <LuLayoutDashboard className="w-4 h-4" /> Dashboard
                                     </Link>
-                                    <Link href="/adopt" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                    <Link href="/dashboard/adopt" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
                                         <FaPlusCircle className="w-4 h-4" /> Adopt Now
                                     </Link>
-                                    <Link href="/my-listings" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                    <Link href="/dashboard/my-listings" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
                                         <IoListCircle className="w-4 h-4" /> My Listings
                                     </Link>
-                                    <Link href="/dashboard" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                    <Link href="/dashboard/my-request" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
                                         <LuListTodo className="w-4 h-4" /> My Requests
                                     </Link>
-                                    <Link href="/settings" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                    <Link href="/dashboard/settings" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
                                         <BiUser className="w-4 h-4" /> Settings
                                     </Link>
                                     <button onClick={handelLogOut} className="px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3 transition-colors text-left dark:hover:bg-slate-900/60">
@@ -136,20 +136,7 @@ const NavBar = () => {
                             </ul>
                             <div className="my-2 px-4 space-x-2">
                                 {
-                                    user && <div className='hidden gap-2 md:flex'>
-                                        <Avatar size='md'>
-                                            <Avatar.Image
-                                                alt={user?.name}
-                                                src={user?.image}
-                                                referrerPolicy='no-referrer' />
-                                            <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
-                                        </Avatar>
-                                        <Button onClick={handelLogOut} size='md' variant='danger'>Log Out</Button>
-                                    </div>
-                                }
-
-                                {
-                                    !user && <div className='hidden md:flex items-center gap-2'>
+                                    !user && <div className=' flex items-center gap-2'>
                                         <Link href='/signin'>
                                             <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" size="sm">Login</Button>
                                         </Link>
@@ -158,6 +145,46 @@ const NavBar = () => {
                                         </Link>
                                     </div>
                                 }
+
+                                {
+                                    user && <div className='relative group hidden gap-2 md:flex'>
+                                        <button className='flex items-center gap-3 p-1 rounded-full hover:bg-muted transition-colors border border-transparent hover:border-border cursor-pointer'>
+                                            <Avatar size='md'>
+                                                <Avatar.Image
+                                                    alt={user?.name}
+                                                    src={user?.image}
+                                                    referrerPolicy='no-referrer' />
+                                                <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                                            </Avatar>
+                                        </button>
+
+                                        <div className="absolute right-0 top-12 w-56 bg-white border border-slate-200 rounded-2xl shadow-2xl hidden group-hover:flex flex-col py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200 dark:bg-slate-950 dark:text-slate-200 dark:border-slate-800/60">
+                                            <div className="px-4 py-3 border-b border-slate-100">
+                                                <p className="font-bold text-sm">{user?.name}</p>
+                                                <p className="text-xs truncate text-slate-500 dark:text-slate-400 mt-0.5">{user?.email}</p>
+                                            </div>
+                                            <Link href="/dashboard" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                                <LuLayoutDashboard className="w-4 h-4" /> Dashboard
+                                            </Link>
+                                            <Link href="/dashboard/adopt" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                                <FaPlusCircle className="w-4 h-4" /> Adopt Now
+                                            </Link>
+                                            <Link href="/dashboard/my-listings" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                                <IoListCircle className="w-4 h-4" /> My Listings
+                                            </Link>
+                                            <Link href="/dashboard/my-request" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                                <LuListTodo className="w-4 h-4" /> My Requests
+                                            </Link>
+                                            <Link href="/dashboard/settings" className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-900/60">
+                                                <BiUser className="w-4 h-4" /> Settings
+                                            </Link>
+                                            <button onClick={handelLogOut} className="px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3 transition-colors text-left dark:hover:bg-slate-900/60">
+                                                <BiLogOut className="w-4 h-4" /> Log Out
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     )

@@ -47,7 +47,7 @@ const SingUpPage = () => {
         <>
         <section className='bg-gray-50 dark:bg-slate-900 py-12'>
             <div className='max-w-lg mx-auto min-h-[80vh] flex justify-center items-center p-4'>
-                <div className='w-full max-w-md p-6 sm:p-10 md:p-16 border shadow-sm rounded-lg'>
+                <div className='w-full max-w-md p-6 sm:p-10 md:p-16 border shadow-sm rounded-lg dark:bg-slate-800'>
 
 
                     <h1 className="text-center mb-4 text-2xl font-bold">Create Your Account</h1>

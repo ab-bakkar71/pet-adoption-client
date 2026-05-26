@@ -35,7 +35,7 @@ const Hero = () => {
 
             
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Link href="/adopt" className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-orange-200 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer">
+              <Link href="/dashboard/adopt" className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-orange-200 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer">
                 Adopt Now
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>

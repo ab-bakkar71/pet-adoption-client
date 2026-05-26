@@ -1,6 +1,6 @@
 // for get all data
 export const getPets = async()=>{
-    const res= await fetch(`${process.env.PUBLIC_URL}/pets`);
+    const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets`);
     const data= await res.json();
     return data;
 }
@@ -8,14 +8,14 @@ export const getPets = async()=>{
  // for feature
 
  export const featurePet = async()=>{
-    const res= await fetch(`${process.env.PUBLIC_URL}/feature`);
+    const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/feature`);
     const data = await res.json();
     return data;
  }
 
 // for get single data
 export const getPetById = async(petId)=>{
-    const res= await fetch(`${process.env.PUBLIC_URL}/pets/${petId}`);
+    const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`);
     const data= await res.json();
     return data;
 }
