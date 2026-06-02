@@ -1,10 +1,10 @@
-import React from 'react';
+import MyListingClient from "@/components/MyListingClient";
 
-const myListingsPage = () => {
+const myListingsPage = async() => { 
     return (
-        <div>
-             My Listings page
-        </div>
+        <>
+        <MyListingClient/>
+        </>
     );
 };
 

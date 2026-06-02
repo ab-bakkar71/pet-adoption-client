@@ -1,15 +1,16 @@
-import { Card } from '@heroui/react';
+import { Card, Chip } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { BiSolidLocationPlus } from 'react-icons/bi';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import 'animate.css';
+import { Check } from '@gravity-ui/icons';
 
 const PetCard = ({ pet }) => {
-  const { petName, age, breed, location, gender, imageUrl, adoptionFee, _id} = pet;
+  const { petName, age, breed, location, gender, imageUrl, adoptionFee, _id, status} = pet;
   return (
-    <Card className='dark:bg-slate-800 rounded-md ' variant="secondary">
+    <Card className='dark:bg-slate-800 rounded-md relative' variant="secondary">
       <div className='relative w-full aspect-square'>
         <Image
           src={imageUrl}
@@ -41,6 +42,13 @@ const PetCard = ({ pet }) => {
             <span className='text-sm text-gray-500 dark:text-gray-400 ml-1'>Adoption Fee</span> 
         </div>
       </Card.Content>
+      <div className=' absolute top-5 right-5'>
+        <Chip color="success" className='bg-green-500/50 text-white'>
+          <Check width={12} />
+          <Chip.Label>{status}</Chip.Label>
+        </Chip>
+      </div>
+
 
       <Card.Footer className='flex justify-between gap-2'>
         <Link href={`/all-pets/${_id}`} className='px-4 py-2 bg-transparent border border-gray-300 font-medium text-black dark:text-white rounded-md hover:bg-gray-300 hover:dark:bg-gray-600 hover:scale-105 transition'>View Details</Link>

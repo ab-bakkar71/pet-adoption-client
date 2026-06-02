@@ -3,15 +3,17 @@
 
 import { authClient } from '@/lib/auth-client';
 import { Button, Fieldset, Form, Select, Input, Label, ListBox, TextArea, TextField, FieldError } from '@heroui/react';
-
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const adoptPage = () => {
 
+const adoptPage = () => {
+ 
   // get user
       const userinfo = authClient.useSession();
       const user = userinfo?.data?.user;
+      console.log(user);
+
 
   const onSubmit = async(e)=>{
       e.preventDefault()
@@ -28,6 +30,9 @@ const adoptPage = () => {
       const data =await res.json()
        if(data.insertedId){
         toast.success("Pet Added Successful")
+       
+        
+
     }
     return data
   }
@@ -196,8 +201,8 @@ const adoptPage = () => {
 
           {/* owner name */}
           <div className="md:col-span-2 lg:col-span-3">
-            <TextField name="ownerEmail" className="flex flex-col gap-1.5">
-              <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">O</Label>
+            <TextField name="ownerName" className="flex flex-col gap-1.5">
+              <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">Owner name</Label>
               <Input
                 type="text"
                 value={user.name}
@@ -220,144 +225,6 @@ const adoptPage = () => {
         </Button>
       </form>
     </section>
-
-
-
-    // <section className='py-12 bg-gray-50 dark:bg-slate-900 min-h-screen '>
-
-    //   <form
-    //     className="p-10 space-y-8 max-w-3xl mx-auto bg-surface "
-    //   >
-    //     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
-    //       {/* pet Name */}
-    //       <div className="md:col-span-2">
-    //         <TextField name="petName" isRequired>
-    //           <Label>Pet Name</Label>
-    //           <Input placeholder="Daisy, Buddy" className="rounded-2xl" />
-    //           <FieldError />
-    //         </TextField>
-    //       </div>
-
-    //       {/* Country */}
-    //       <TextField name="country" isRequired>
-    //         <Label>Country</Label>
-    //         <Input placeholder="Indonesia" className="rounded-2xl" />
-    //         <FieldError />
-    //       </TextField>
-
-    //       {/* Category - Updated Select Component */}
-    //       <div>
-    //         <Select
-    //           name="category"
-    //           isRequired
-    //           className="w-full"
-    //           placeholder="Select category"
-    //         >
-    //           <Label>Category</Label>
-    //           <Select.Trigger className="rounded-2xl">
-    //             <Select.Value />
-    //             <Select.Indicator />
-    //           </Select.Trigger>
-    //           <Select.Popover>
-    //             <ListBox>
-    //               <ListBox.Item id="Beach" textValue="Beach">
-    //                 Beach
-    //                 <ListBox.ItemIndicator />
-    //               </ListBox.Item>
-    //               <ListBox.Item id="Mountain" textValue="Mountain">
-    //                 Mountain
-    //                 <ListBox.ItemIndicator />
-    //               </ListBox.Item>
-    //               <ListBox.Item id="City" textValue="City">
-    //                 City
-    //                 <ListBox.ItemIndicator />
-    //               </ListBox.Item>
-    //               <ListBox.Item id="Adventure" textValue="Adventure">
-    //                 Adventure
-    //                 <ListBox.ItemIndicator />
-    //               </ListBox.Item>
-    //               <ListBox.Item id="Cultural" textValue="Cultural">
-    //                 Cultural
-    //                 <ListBox.ItemIndicator />
-    //               </ListBox.Item>
-    //               <ListBox.Item id="Luxury" textValue="Luxury">
-    //                 Luxury
-    //                 <ListBox.ItemIndicator />
-    //               </ListBox.Item>
-    //             </ListBox>
-    //           </Select.Popover>
-    //         </Select>
-    //       </div>
-
-    //       {/* Price */}
-    //       <TextField name="price" type="number" isRequired>
-    //         <Label>Price (USD)</Label>
-    //         <Input
-    //           type="number"
-    //           placeholder="1299"
-    //           className="rounded-2xl"
-    //         />
-    //         <FieldError />
-    //       </TextField>
-
-    //       {/* Duration */}
-    //       <TextField name="duration" isRequired>
-    //         <Label>Duration</Label>
-    //         <Input
-    //           placeholder="7 Days / 6 Nights"
-    //           className="rounded-2xl"
-    //         />
-    //         <FieldError />
-    //       </TextField>
-
-    //       {/* Departure Date */}
-    //       <div className="md:col-span-2">
-    //         <TextField name="departureDate" type="date" isRequired>
-    //           <Label>Departure Date</Label>
-    //           <Input type="date" className="rounded-2xl" />
-    //           <FieldError />
-    //         </TextField>
-    //       </div>
-
-    //       {/* Image URL - Removed preview */}
-    //       <div className="md:col-span-2">
-    //         <TextField name="imageUrl" isRequired>
-    //           <Label>Image URL</Label>
-    //           <Input
-    //             type="url"
-    //             placeholder="https://example.com/bali-paradise.jpg"
-    //             className="rounded-2xl"
-    //           />
-    //           <FieldError />
-    //         </TextField>
-    //       </div>
-
-    //       {/* Description */}
-    //       <div className="md:col-span-2">
-    //         <TextField name="description" isRequired>
-    //           <Label>Description</Label>
-    //           <TextArea
-    //             placeholder="Describe the travel experience..."
-    //             className="rounded-3xl"
-    //           />
-    //           <FieldError />
-    //         </TextField>
-    //       </div>
-    //     </div>
-
-    //     {/* Buttons */}
-
-    //     <Button
-    //       type="submit"
-    //       variant="outline"
-
-    //       className=" rounded-none w-full bg-cyan-500 text-white"
-    //     >
-    //         Adopt Now
-    //     </Button>
-    //   </form>
-
-    // </section>
   );
 };
 

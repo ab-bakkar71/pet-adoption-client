@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { getPetById } from "@/lib/data";
-import { HeartPulse } from "@gravity-ui/icons";
-import { Button } from "@heroui/react";
+import { Check, HeartPulse } from "@gravity-ui/icons";
+import { Button, Chip } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { BiSolidLocationPlus } from "react-icons/bi";
@@ -25,7 +25,7 @@ const PetIdPage = async ({ params }) => {
 
     return (
         <section className="py-10 bg-gray-50 dark:bg-slate-900 ">
-            <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 p-4 rounded-md">
+            <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 p-4 rounded-md relative">
                 <div className='relative w-full '>
                     <Image
                         src={pet.imageUrl}
@@ -111,6 +111,14 @@ const PetIdPage = async ({ params }) => {
                 <div>
                     <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">{pet.description}</p>
                 </div>
+
+                {/* status */}
+                <div className=' absolute top-5 right-5'>
+                        <Chip color="success" className='bg-green-500/50 text-white'>
+                          <Check width={12} />
+                          <Chip.Label>{pet.status}</Chip.Label>
+                        </Chip>
+                      </div>
 
                 {/* cta */}
                 <div className="w-full mt-7">

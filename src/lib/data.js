@@ -23,3 +23,11 @@ export const getPetById = async(petId, token)=>{
     const data= await res.json();
     return data;
 }
+
+// my listing data fetch
+export const myListing = async(email) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/my-listings/${email}`);
+    const data = await res.json();
+    return data;
+
+}
