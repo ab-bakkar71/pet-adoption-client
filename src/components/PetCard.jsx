@@ -6,6 +6,7 @@ import { BiSolidLocationPlus } from 'react-icons/bi';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import 'animate.css';
 import { Check } from '@gravity-ui/icons';
+import AdoptMeButton from './AdoptMeButton';
 
 const PetCard = ({ pet }) => {
   const { petName, age, breed, location, gender, imageUrl, adoptionFee, _id, status} = pet;
@@ -52,7 +53,7 @@ const PetCard = ({ pet }) => {
 
       <Card.Footer className='flex justify-between gap-2'>
         <Link href={`/all-pets/${_id}`} className='px-4 py-2 bg-transparent border border-gray-300 font-medium text-black dark:text-white rounded-md hover:bg-gray-300 hover:dark:bg-gray-600 hover:scale-105 transition'>View Details</Link>
-        <Link href='#' className='px-4 py-2 bg-green-500 text-white font-medium rounded-md hover:bg-green-600  hover:scale-105 transition'>Adopt Me</Link>
+        <AdoptMeButton pet={pet} />
       </Card.Footer>
     </Card>
   );
