@@ -1,3 +1,4 @@
+
 // for get all data
 export const getPets = async()=>{
     const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets`);
@@ -31,3 +32,20 @@ export const myListing = async(email) => {
     return data;
 
 }
+
+// edit pet data fetch
+export const editPet = async(petId, token, formData) => {
+    
+    const petData =  Object.fromEntries(formData.entries());
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}` || ""
+        },
+        body: JSON.stringify(petData)
+    });
+    const data = await res.json();
+    return data;
+}   

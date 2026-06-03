@@ -6,6 +6,7 @@ import { Avatar, Button } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { LuArrowUpRight } from "react-icons/lu";
+import EditPet from "./EditPet";
 
 
 const myListingClient = () => {
@@ -87,11 +88,10 @@ const myListingClient = () => {
                                                 {pet.status}
                                             </span>
                                         </td>
-                                        <td className="p-4 text-right space-x-2">
-                                            <Button>
-                                                <FaRegEdit />
-                                                Edit
-                                            </Button>
+                                        <td className="flex justify-end items-center p-4 text-right space-x-2">
+                                            <div>
+                                                <EditPet user={user} pet={pet} />
+                                            </div>
                                             <Button variant="danger">
                                                 <TrashBin />
                                                 Delete
