@@ -49,3 +49,18 @@ export const editPet = async(petId, token, formData) => {
     const data = await res.json();
     return data;
 }   
+
+
+
+// adoption data fetch
+export const adoptionRequest = async (adoptionData) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/adoption-request`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(adoptionData)
+    });
+    const data = await res.json();
+    return data;
+}

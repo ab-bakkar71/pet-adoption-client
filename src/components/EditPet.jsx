@@ -21,9 +21,7 @@ const EditPet = ({ user, pet }) => {
             if(updatedPet.modifiedCount > 0){
                 toast.success("Pet information updated successfully!");
                 router.refresh();
-            }
-
-            
+            }   
             
         } catch (error) {
             console.error('Error updating pet:', error);

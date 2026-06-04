@@ -1,11 +1,33 @@
+import { adoptionRequest } from '@/lib/data';
 import { Button, Input, Label, Modal, Surface, TextField } from '@heroui/react';
 import React from 'react';
 import { IoMdPaw } from 'react-icons/io';
+import { toast } from 'react-toastify';
 
 const AdoptMe = ({ pet, user, isOpen, setIsOpen }) => {
+
+    const handleAdoption = async(e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const formFields = Object.fromEntries(formData.entries());
+        const adoptionData = {
+            ...formFields,
+            petId: pet._id,
+            petImage: pet.imageUrl,
+            adopterName: user.name,
+            adopterEmail: user.email,
+            status: "pending",
+
+        }
+        const result = await adoptionRequest(adoptionData);
+        if(result.insertedId){
+            toast.success("Adoption request submitted successfully!")
+        }
+
+    }
+
     return (
         <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
-
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
                     <Modal.Dialog className="sm:max-w-md">
@@ -21,62 +43,61 @@ const AdoptMe = ({ pet, user, isOpen, setIsOpen }) => {
                         </Modal.Header>
                         <Modal.Body className="p-6">
                             <Surface variant="default">
-                                <form className="flex flex-col gap-4">
+                                <form onSubmit={handleAdoption} className="flex flex-col gap-4">
                                     <TextField
                                         className="w-full"
-                                        name="name"
+                                        name="petName"
                                         value={pet?.petName}
                                         variant="secondary"
                                         readOnly>
                                         <Label>Pet Name</Label>
                                         <Input placeholder="Enter your name" />
                                     </TextField>
-                                    <TextField 
-                                    className="w-full" 
-                                    name="name" 
-                                    value={user?.name}
-                                     variant="secondary">
+                                    <TextField
+                                        className="w-full"
+                                        name="ownerName"
+                                        value={pet?.ownerName}
+                                        variant="secondary">
                                         <Label>Owner Name</Label>
                                         <Input placeholder="Enter your name" />
                                     </TextField>
-                                    <TextField 
-                                    className="w-full" 
-                                    name="email" 
-                                    type="email" 
-                                    variant="secondary"
-                                    value={user?.email}>
+                                    <TextField
+                                        className="w-full"
+                                        name="ownerEmail"
+                                        type="email"
+                                        variant="secondary"
+                                        value={pet?.ownerEmail}>
                                         <Label>Owner Email</Label>
                                         <Input placeholder="Enter your email" />
                                     </TextField>
-                                    <TextField 
-                                    className="w-full" 
-                                    name="Price" 
-                                    type="number" 
-                                    variant="secondary"
-                                    value={pet?.adoptionFee}
-                                    readOnly>
+                                    <TextField
+                                        className="w-full"
+                                        name="adoptionFee"
+                                        type="number"
+                                        variant="secondary"
+                                        value={pet?.adoptionFee}
+                                        readOnly>
                                         <Label>Pet Price</Label>
                                         <Input placeholder="Enter the pet's price" />
                                     </TextField>
-                                    <TextField 
-                                    className="w-full" 
-                                    name="Pickup date" 
-                                    type="date" 
-                                    variant="secondary">
-                                        <Label>Pet Price</Label>
-                                        <Input placeholder="Enter the pet's price" />
+                                    <TextField
+                                        required
+                                        className="w-full"
+                                        name="pickupDate"
+                                        type="date"
+                                        variant="secondary">
+                                        <Label>Pickup Date</Label>
+                                        <Input placeholder="Select a date" />
                                     </TextField>
-
-
+                                    <Modal.Footer>
+                                        <Button slot="close" variant="secondary">
+                                            Cancel
+                                        </Button>
+                                        <Button type="submit" className='bg-green-500 hover:bg-green-600 text-white' slot="close">Adopt Now</Button>
+                                    </Modal.Footer>
                                 </form>
                             </Surface>
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button slot="close" variant="secondary">
-                                Cancel
-                            </Button>
-                            <Button className='bg-green-500 hover:bg-green-600 text-white' slot="close">Adopt Now</Button>
-                        </Modal.Footer>
                     </Modal.Dialog>
                 </Modal.Container>
             </Modal.Backdrop>
