@@ -1,18 +1,23 @@
 "use client"
 import { authClient } from "@/lib/auth-client";
 import { myListing } from '@/lib/data';
-import { Globe, TrashBin } from "@gravity-ui/icons";
-import { Avatar, Button } from "@heroui/react";
+import { TrashBin } from "@gravity-ui/icons";
+import { Button } from "@heroui/react";
 import { useEffect, useState } from "react";
 import EditPet from "./EditPet";
 import Image from "next/image";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Link from "next/link";
+import AdoptionRequestClient from "./AdoptionRequestClient";
+import { FaLeaf } from "react-icons/fa";
+import { CircleLoader } from "react-spinners";
 
 
 const myListingClient = () => {
 
     const [myPets, setMyPets] = useState([]);
+
+    const [loading, setLoading] = useState(true)
 
     // get user
     const userinfo = authClient.useSession();
@@ -22,9 +27,10 @@ const myListingClient = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (!email) return;
-
+            setLoading(true)
             const data = await myListing(email);
             setMyPets(data);
+            setLoading(false)
         };
         fetchData();
 
@@ -34,7 +40,12 @@ const myListingClient = () => {
 
 
     return (
-        <section className='min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300'>
+       <>
+        {
+            loading ? (<div className="flex flex-col items-center justify-center gap-2 min-h-screen">
+                                <CircleLoader color="#00bd56" />
+                            </div>):
+            (<section className='min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300'>
             <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-8'>
                 <div className="rounded-2xl border bg-white border-slate-200 shadow-sm dark:bg-slate-900/40 dark:border-slate-800/80 overflow-hidden">
                     <div className="p-5 border-b border-slate-100 dark:border-slate-800/60 flex items-center justify-between">
@@ -46,7 +57,13 @@ const myListingClient = () => {
                 </div>
 
                 <div className="my-5 p-5 rounded-2xl border border-slate-200 bg-white shadow-sm dark:bg-slate-900/40 dark:border-slate-800/80 overflow-hidden">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                {
+                    myPets.length === 0 ? (<div className="h-[60vh] flex items-center justify-center">
+                        <h2 className="text-4xl font-bold">You did not add any pets.</h2>
+
+
+                    </div>):(<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                         {
                             myPets.map(pet => (
                                 <div
@@ -84,17 +101,12 @@ const myListingClient = () => {
                                         <div className="flex flex-col gap-2.5">
                                             <Link
                                                 href={`/all-pets/${pet._id}`}
-                                                className="w-full py-2 bg-transparent border border-slate-300 dark:border-slate-700 font-medium text-slate-900 dark:text-slate-100 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm text-center cursor-pointer"
+                                                className="w-full rounded-full py-2 bg-transparent border border-slate-300 dark:border-slate-700 font-semibold text-gray-900 dark:text-gray-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm text-center cursor-pointer block"
                                             >
                                                 Details
                                             </Link>
 
-                                            <Button
-                                                href={`/all-pets/${pet._id}`}
-                                                className="w-full py-2 bg-transparent border border-slate-300 dark:border-slate-700 font-medium text-slate-900 dark:text-slate-100 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm text-center cursor-pointer"
-                                            >
-                                                Request
-                                            </Button>
+                                            <AdoptionRequestClient pet={pet} />
                                         </div>
 
                                         
@@ -114,10 +126,15 @@ const myListingClient = () => {
                                 </div>
                             ))
                         }
-                    </div>
+                    </div>)
+                }
+
+                    
                 </div>
             </div>
-        </section>
+        </section>)
+        }
+       </>
     );
 };
 

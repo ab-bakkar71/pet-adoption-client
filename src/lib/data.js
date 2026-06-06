@@ -65,12 +65,24 @@ export const adoptionRequest = async (adoptionData) => {
     return data;
 }
 
+// get adoption request by user id
+export const getAdoptionRequestsByPetId = async (petId) => {
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/pet/${petId}`
+    );
+
+    const data =  await res.json();
+    return data;
+};
+
 // get adoption request by user email
 export const getAdoptionRequestByEmail = async (email) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/${email}`);
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/user/${email}`
+    );
     const data = await res.json();
     return data;
-}
+};
 
 // accept or reject adoption request by id
 export const updateAdoptionRequestStatus = async (Id) => {
