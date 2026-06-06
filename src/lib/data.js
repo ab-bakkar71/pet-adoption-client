@@ -64,3 +64,19 @@ export const adoptionRequest = async (adoptionData) => {
     const data = await res.json();
     return data;
 }
+
+// get adoption request by user email
+export const getAdoptionRequestByEmail = async (email) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/${email}`);
+    const data = await res.json();
+    return data;
+}
+
+// accept or reject adoption request by id
+export const updateAdoptionRequestStatus = async (Id) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/adoption-request/${Id}`, {
+        method: 'PATCH'
+    });
+    const data = await res.json();
+    return data;
+}

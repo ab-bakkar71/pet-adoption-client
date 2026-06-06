@@ -44,10 +44,17 @@ const PetCard = ({ pet }) => {
         </div>
       </Card.Content>
       <div className=' absolute top-5 right-5'>
-        <Chip color="success" className='bg-green-500/50 text-white'>
-          <Check width={12} />
-          <Chip.Label>{status}</Chip.Label>
-        </Chip>
+        {
+          status === "available" ? (
+            <Chip color="success" size="xs" className='font-bold uppercase tracking-wide bg-green-500/50 text-white'>
+              <Check width={12} />
+              <Chip.Label>{status}</Chip.Label>
+            </Chip>
+          ) : (<Chip size="xs" className='font-bold uppercase tracking-wide bg-gray-500/50 text-white'>
+              <Check width={12} />
+              <Chip.Label>{status}</Chip.Label>
+            </Chip>)
+        }
       </div>
 
 

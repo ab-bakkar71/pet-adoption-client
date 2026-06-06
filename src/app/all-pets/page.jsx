@@ -3,6 +3,11 @@ import PetCard from '@/components/PetCard';
 import 'animate.css';
 import { getPets } from '@/lib/data';
 
+export const metadata = {
+  title: 'All Pets - For Pet Adoption',
+  description: 'Discover a wide variety of adorable pets waiting for their forever homes. Browse through our collection of cats, dogs, rabbits, and more, all looking for loving families to adopt them. Find your new furry friend today and give them the loving home they deserve!',
+}
+
 const AllPetsPage = async () => {
     const pets = await getPets();
     

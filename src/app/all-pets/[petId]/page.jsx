@@ -1,13 +1,28 @@
+import AdoptMeButton from "@/components/AdoptMeButton";
 import { auth } from "@/lib/auth";
 import { getPetById } from "@/lib/data";
 import { Check, HeartPulse } from "@gravity-ui/icons";
-import { Button, Chip } from "@heroui/react";
+import { Chip } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { BiSolidLocationPlus } from "react-icons/bi";
 import { FaCalendarAlt, FaSyringe } from "react-icons/fa";
 import { PiGenderTransgenderFill, PiPawPrintFill } from "react-icons/pi";
 import { TbCurrencyTaka, TbDna2 } from "react-icons/tb";
+
+export const generateMetadata = async ({ params }) => {
+    const { petId } = await params;
+    const {token} = await auth.api.getToken({
+
+        headers: await headers()
+    });
+    const pet = await getPetById(petId, token);
+
+    return {
+        title: `${pet.petName} - For Pet Adoption`,
+        description: `Learn more about ${pet.petName}, a ${pet.breed} looking for a loving home.`
+    };
+}
 
 
 
@@ -114,15 +129,22 @@ const PetIdPage = async ({ params }) => {
 
                 {/* status */}
                 <div className=' absolute top-5 right-5'>
-                        <Chip color="success" className='bg-green-500/50 text-white'>
-                          <Check width={12} />
-                          <Chip.Label>{pet.status}</Chip.Label>
-                        </Chip>
+                        {
+                                  pet.status === "available" ? (
+                                    <Chip color="success" size="xs" className='font-bold uppercase tracking-wide bg-green-500/50 text-white'>
+                                      <Check width={12} />
+                                      <Chip.Label>{pet.status}</Chip.Label>
+                                    </Chip>
+                                  ) : (<Chip size="xs" className='font-bold uppercase tracking-wide bg-gray-500/50 text-white'>
+                                      <Check width={12} />
+                                      <Chip.Label>{pet.status}</Chip.Label>
+                                    </Chip>)
+                                }
                       </div>
 
                 {/* cta */}
                 <div className="w-full mt-7">
-                    <Button className='w-full bg-[#00bd56] hover:bg-emerald-600 active:scale-[0.99] text-white font-bold h-12 rounded-xl transition-all shadow-md cursor-pointer text-sm tracking-wide'>Adopt Me</Button>
+                    <AdoptMeButton pet={pet} />
                 </div>
             </div>
         </section>

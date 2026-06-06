@@ -4,9 +4,10 @@ import { myListing } from '@/lib/data';
 import { Globe, TrashBin } from "@gravity-ui/icons";
 import { Avatar, Button } from "@heroui/react";
 import { useEffect, useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
-import { LuArrowUpRight } from "react-icons/lu";
 import EditPet from "./EditPet";
+import Image from "next/image";
+import { TbCurrencyTaka } from "react-icons/tb";
+import Link from "next/link";
 
 
 const myListingClient = () => {
@@ -29,6 +30,8 @@ const myListingClient = () => {
 
     }, [email])
 
+    console.log(myPets);
+
 
     return (
         <section className='min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300'>
@@ -40,71 +43,79 @@ const myListingClient = () => {
                             <p className="text-xs text-slate-400 mt-0.5">A list of pets you have put up for adoption.</p>
                         </div>
                     </div>
-
-
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm border-collapse">
-                            <thead>
-                                <tr className="bg-slate-50/70 dark:bg-slate-900/20 text-slate-400 dark:text-slate-500 font-semibold border-b border-slate-100 dark:border-slate-800/60">
-                                    <th className="p-4">Pet Image</th>
-                                    <th className="p-4">Pet Name</th>
-                                    <th className="p-4">Species / Breed</th>
-                                    <th className="p-4">Adoption Fee</th>
-                                    <th className="p-4">Status</th>
-                                    <th className="p-4 text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/40">
-                                {myPets.map((pet) => (
-                                    <tr key={pet._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/20 transition-colors">
-
-                                        <td className="p-4">
-                                            <Avatar className="size-16">
-                                                <Avatar.Image
-                                                    alt={pet.petName}
-                                                    src={pet.imageUrl}
-                                                />
-                                                <Avatar.Fallback>XL</Avatar.Fallback>
-                                            </Avatar>
-                                        </td>
-
-                                        <td className="p-4 font-bold text-slate-900 dark:text-slate-200">{pet.petName}</td>
-                                        <td className="p-4 text-slate-500 dark:text-slate-400">
-                                            <span className="font-medium text-slate-700 dark:text-slate-300">{pet.species}</span>
-                                            <span className="block text-xs">{pet.breed}</span>
-                                        </td>
-                                        <td className="p-4 font-semibold">
-                                            {pet.fee === 0 ? (
-                                                <span className="text-emerald-500 dark:text-emerald-400 text-xs font-bold uppercase tracking-wide bg-emerald-500/10 px-2 py-0.5 rounded-md">Free</span>
-                                            ) : (
-                                                <span className="text-slate-700 dark:text-slate-300">৳ {pet.adoptionFee}</span>
-                                            )}
-                                        </td>
-                                        <td className="p-4">
-                                            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${pet.status === "Available"
-                                                ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400"
-                                                : "bg-slate-500/10 text-slate-500"
-                                                }`}>
-                                                {pet.status}
-                                            </span>
-                                        </td>
-                                        <td className="flex justify-end items-center p-4 text-right space-x-2">
-                                            <div>
-                                                <EditPet user={user} pet={pet} />
-                                            </div>
-                                            <Button variant="danger">
-                                                <TrashBin />
-                                                Delete
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
 
+                <div className="my-5 p-5 rounded-2xl border border-slate-200 bg-white shadow-sm dark:bg-slate-900/40 dark:border-slate-800/80 overflow-hidden">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        {
+                            myPets.map(pet => (
+                                <div
+                                    key={pet._id}
+                                    className="p-4 bg-white dark:border dark:bg-slate-900/90 dark:border-slate-800/80 hover:-translate-y-1 transition duration-300 rounded-lg shadow-sm"
+                                >
+                                    {/* Image Container */}
+                                    <div className='relative w-full aspect-square'>
+                                        <Image
+                                            src={pet.imageUrl}
+                                            alt={pet.petName}
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            className="object-cover rounded-md"
+                                        />
+                                    </div>
 
+                                    {/* pet name and free */}
+                                    <div className="text-gray-900 dark:text-white text-xl font-semibold px-1 mt-4 flex items-center justify-between">
+                                        <span>{pet.petName}</span>
+                                        <div className='flex items-center text-lg font-bold text-green-500 '>
+                                            <TbCurrencyTaka className="text-xl" />
+                                            <span>{pet.adoptionFee}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Subtitle */}
+                                    <p className="text-gray-500 dark:text-zinc-400 text-sm mt-1 px-1">
+                                        {pet.breed} - {pet.age} old - {pet.gender}
+                                    </p>
+
+                                    {/* Button */}
+                                    <div className="mt-6 grid grid-cols-2 gap-3 items-center">
+                                        
+                                        <div className="flex flex-col gap-2.5">
+                                            <Link
+                                                href={`/all-pets/${pet._id}`}
+                                                className="w-full py-2 bg-transparent border border-slate-300 dark:border-slate-700 font-medium text-slate-900 dark:text-slate-100 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm text-center cursor-pointer"
+                                            >
+                                                Details
+                                            </Link>
+
+                                            <Button
+                                                href={`/all-pets/${pet._id}`}
+                                                className="w-full py-2 bg-transparent border border-slate-300 dark:border-slate-700 font-medium text-slate-900 dark:text-slate-100 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm text-center cursor-pointer"
+                                            >
+                                                Request
+                                            </Button>
+                                        </div>
+
+                                        
+                                        <div className=" flex flex-col gap-2.5">
+                                           
+                                            <EditPet pet={pet} user={user} />
+
+                                            <Button
+                                                color="danger" 
+                                                className="w-full flex items-center justify-center gap-1.5 py-2 bg-rose-600 hover:bg-rose-500 text-white font-medium text-sm rounded-full transition cursor-pointer shadow-md shadow-rose-600/10"
+                                            >
+                                                <TrashBin className="size-4" />
+                                                Delete
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         </section>
     );

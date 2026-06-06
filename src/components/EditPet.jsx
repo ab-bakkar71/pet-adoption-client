@@ -33,7 +33,7 @@ const EditPet = ({ user, pet }) => {
     return (
         <div>
             <Modal>
-                <Button>
+                <Button className="w-full">
                     <FaRegEdit />
                     Edit
                 </Button>

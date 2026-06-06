@@ -5,6 +5,7 @@ import AdoptMe from "./AdoptMe";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import { Button } from "@heroui/react";
 
 
 const AdoptMeButton = ({ pet }) => {
@@ -24,14 +25,23 @@ const AdoptMeButton = ({ pet }) => {
     };
 
     return (
-        <>
-            <button href='#' className='px-4 py-2 bg-green-500 text-white font-medium rounded-md hover:bg-green-600  hover:scale-105 transition cursor-pointer' onClick={handleAdoptMeClick}>Adopt Me</button>
+      <div>
+        {
+            pet.status === "available" ? ( <>
+            <Button href='#' className='px-4 py-2 bg-green-500 text-white font-medium rounded-md hover:bg-green-600  hover:scale-105 transition cursor-pointer' onClick={handleAdoptMeClick}>Adopt Me</Button>
             <AdoptMe pet={pet}
                 user={user}
                 isOpen={isOpen}
                 setIsOpen={setIsOpen} />
-
-        </>
+            </>) : (<>
+            <Button href='#' isDisabled className='px-4 py-2 bg-green-500 text-white font-medium rounded-md hover:bg-green-600  hover:scale-105 transition cursor-pointer' onClick={handleAdoptMeClick}>Adopted</Button>
+            <AdoptMe pet={pet}
+                user={user}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen} />
+            </>)
+        }
+      </div>
     );
 };
 

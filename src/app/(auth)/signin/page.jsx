@@ -7,6 +7,8 @@ import Link from 'next/link';
 import React from 'react';
 import { toast } from 'react-toastify';
 
+
+
 const singInPage = () => {
 
     const handleLogin = async (e) => {

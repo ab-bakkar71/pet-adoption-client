@@ -14,8 +14,8 @@ const AdoptMe = ({ pet, user, isOpen, setIsOpen }) => {
             ...formFields,
             petId: pet._id,
             petImage: pet.imageUrl,
-            adopterName: user.name,
-            adopterEmail: user.email,
+            adopterName: user?.name,
+            adopterEmail: user?.email,
             status: "pending",
 
         }
