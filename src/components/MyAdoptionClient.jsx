@@ -1,16 +1,18 @@
 "use client"
 import { authClient } from '@/lib/auth-client';
-import { getAdoptionRequestByEmail } from '@/lib/data';
+import { adoptionCancel, getAdoptionRequestByEmail } from '@/lib/data';
 import { CircleCheckFill, Clock } from '@gravity-ui/icons';
 import { AlertDialog, Avatar, Button, Chip } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { FaCircleXmark } from 'react-icons/fa6';
+import { FaCircleXmark, FaRegCircleXmark } from 'react-icons/fa6';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 import { CircleLoader } from 'react-spinners';
 
-const MyAdoptionClient = () => {
+const MyAdoptionClient = ({ adoptionCancelAction }) => {
     const [myAdoptions, setMyAdoptions] = useState([]);
     const [loading, setLoading] = useState(true)
+    const router = useRouter()
 
     // get user
     const userinfo = authClient.useSession();
@@ -31,7 +33,13 @@ const MyAdoptionClient = () => {
 
     }, [email])
 
-    console.log(myAdoptions);
+   const handleCancel = async(id) => {
+        await adoptionCancelAction(id);
+        router.push("/dashboard/my-request")
+
+   }
+
+
 
 
     return (
@@ -137,32 +145,32 @@ const MyAdoptionClient = () => {
                                                         <td className="flex justify-end items-center px-4 py-6 text-right space-x-2">
                                                             {
                                                                 request.status === "pending" ? (<AlertDialog>
-                                                                    <Button color="success"> <IoCheckmarkCircle className='size-4' /> Accept</Button>
+                                                                    <Button variant="danger"> <FaRegCircleXmark  className='size-4' /> Cancel</Button>
                                                                     <AlertDialog.Backdrop>
                                                                         <AlertDialog.Container>
                                                                             <AlertDialog.Dialog className="sm:max-w-[400px]">
                                                                                 <AlertDialog.CloseTrigger />
                                                                                 <AlertDialog.Header>
-                                                                                    <AlertDialog.Icon status="success" />
-                                                                                    <AlertDialog.Heading>Want to accept this request?</AlertDialog.Heading>
+                                                                                    <AlertDialog.Icon status="danger" />
+                                                                                    <AlertDialog.Heading>Want to cancel this request?</AlertDialog.Heading>
                                                                                 </AlertDialog.Header>
                                                                                 <AlertDialog.Body>
                                                                                     <p>
-                                                                                        Are you sure you want to accept this adoption request? This action cannot be undone.
+                                                                                        Are you sure you want to cancel this adoption request? This action cannot be undone.
                                                                                     </p>
                                                                                 </AlertDialog.Body>
                                                                                 <AlertDialog.Footer>
-                                                                                    <Button slot="close" color="tertiary">
+                                                                                    <Button slot="close" variant="tertiary">
                                                                                         Cancel
                                                                                     </Button>
-                                                                                    <Button onClick={() => handleAccept(request._id)} slot="close" color="success">
-                                                                                        Accept Request
+                                                                                    <Button onClick={() => handleCancel(request._id)} slot="close" variant="danger">
+                                                                                        Cancel Request
                                                                                     </Button>
                                                                                 </AlertDialog.Footer>
                                                                             </AlertDialog.Dialog>
                                                                         </AlertDialog.Container>
                                                                     </AlertDialog.Backdrop>
-                                                                </AlertDialog>) : (<Button color="success" isDisabled> <IoCheckmarkCircle className='size-4' />Accept</Button>)
+                                                                </AlertDialog>) : (<Button color="success" isDisabled className='hidden'> <IoCheckmarkCircle className='size-4' />Cancel</Button>)
                                                             }
 
                                                         </td>

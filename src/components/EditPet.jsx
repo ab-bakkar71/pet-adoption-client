@@ -16,11 +16,13 @@ const EditPet = ({ user, pet }) => {
         try {
             const token = localStorage.getItem('token');
             const updatedPet = await editPet(pet._id, token, formData);
-            console.log('Updated Pet:', updatedPet);
+            
 
             if(updatedPet.modifiedCount > 0){
                 toast.success("Pet information updated successfully!");
-                router.refresh();
+                // router.push('/dashboard/my-listings')
+                // router.refresh();
+                 window.location.reload();
             }   
             
         } catch (error) {
@@ -221,7 +223,7 @@ const EditPet = ({ user, pet }) => {
                                                 Cancel
                                             </Button>
                                             <Button type="submit" slot="close">
-                                                Send Message
+                                                Edit Pet
                                             </Button>
                                         </Modal.Footer>
                                     </form>

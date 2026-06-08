@@ -10,6 +10,7 @@ import { FaCircleXmark } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { TbCurrencyTaka } from 'react-icons/tb';
+import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 
 const AdoptionRequestClient = ({ pet }) => {
     const [adoptionRequests, setAdoptionRequests] = useState([]);
@@ -27,7 +28,8 @@ const AdoptionRequestClient = ({ pet }) => {
         const data = await updateAdoptionRequestStatus(Id);
         if (data) {
             toast.success("Adoption request accepted successfully!");
-            route.refresh();
+            // route.push('/dashboard/my-request');
+            window.location.reload();
         }
     }
 
@@ -49,9 +51,7 @@ const AdoptionRequestClient = ({ pet }) => {
                         <Modal.CloseTrigger />
                         <Modal.Body>
                             {/* data */}
-
                             <div>
-
                                 {
                                     adoptionRequests.length === 0 ? (
                                         <p className="text-4xl text-slate-500 dark:text-slate-400 p-10 text-center">
@@ -135,7 +135,7 @@ const AdoptionRequestClient = ({ pet }) => {
                                                             <td className="flex justify-end items-center px-4 py-6 text-right space-x-2">
                                                                 {
                                                                     request.status === "pending" ? (<AlertDialog>
-                                                                        <Button color="success"> <IoCheckmarkCircle className='size-4' /> Accept</Button>
+                                                                        <Button color="success"> <IoIosCheckmarkCircleOutline className='size-4' /> Accept</Button>
                                                                         <AlertDialog.Backdrop>
                                                                             <AlertDialog.Container>
                                                                                 <AlertDialog.Dialog className="sm:max-w-[400px]">
@@ -160,19 +160,15 @@ const AdoptionRequestClient = ({ pet }) => {
                                                                                 </AlertDialog.Dialog>
                                                                             </AlertDialog.Container>
                                                                         </AlertDialog.Backdrop>
-                                                                    </AlertDialog>) : (<Button color="success" isDisabled> <IoCheckmarkCircle className='size-4' />Accept</Button>)
+                                                                    </AlertDialog>) : (<Button color="success" isDisabled className='hidden'> <IoIosCheckmarkCircleOutline className='size-4' />Accept</Button>)
                                                                 }
-
                                                             </td>
-
                                                         </tr>
                                                     ))}
-
                                                 </tbody>
                                             </table>
                                         </div>
-                                    )
-                                }
+                                    )}
                             </div>
                         </Modal.Body>
                     </Modal.Dialog>

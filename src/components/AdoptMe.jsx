@@ -6,8 +6,13 @@ import { toast } from 'react-toastify';
 
 const AdoptMe = ({ pet, user, isOpen, setIsOpen }) => {
 
-    const handleAdoption = async(e) => {
+    const handleAdoption = async (e) => {
         e.preventDefault();
+
+        if (user?.email === pet?.ownerEmail) {
+            toast.error("Pet owners cannot adopt their own pets.");
+            return;
+        }
         const formData = new FormData(e.currentTarget);
         const formFields = Object.fromEntries(formData.entries());
         const adoptionData = {
@@ -20,7 +25,7 @@ const AdoptMe = ({ pet, user, isOpen, setIsOpen }) => {
 
         }
         const result = await adoptionRequest(adoptionData);
-        if(result.insertedId){
+        if (result.insertedId) {
             toast.success("Adoption request submitted successfully!")
         }
 

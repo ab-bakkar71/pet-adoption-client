@@ -1,13 +1,14 @@
 "use client"
-
-
 import { authClient } from '@/lib/auth-client';
 import { Button, Fieldset, Form, Select, Input, Label, ListBox, TextArea, TextField, FieldError } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { toast } from 'react-toastify';
 
 
+
 const adoptPage = () => {
+  const router = useRouter();
  
   // get user
       const userinfo = authClient.useSession();
@@ -30,9 +31,7 @@ const adoptPage = () => {
       const data =await res.json()
        if(data.insertedId){
         toast.success("Pet Added Successful")
-       
-        
-
+       router.push('/dashboard/my-listings')
     }
     return data
   }
@@ -192,7 +191,7 @@ const adoptPage = () => {
               <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">Your Email</Label>
               <Input
                 type="email"
-                value={user.email}
+                value={user?.email}
                 readOnly
                 className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed outline-hidden"
               />
@@ -205,7 +204,7 @@ const adoptPage = () => {
               <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">Owner name</Label>
               <Input
                 type="text"
-                value={user.name}
+                value={user?.name}
                 readOnly
                 className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed outline-hidden"
               />

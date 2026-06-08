@@ -11,9 +11,10 @@ import Link from "next/link";
 import AdoptionRequestClient from "./AdoptionRequestClient";
 import { FaLeaf } from "react-icons/fa";
 import { CircleLoader } from "react-spinners";
+import DeletePet from "./DeletePet";
 
 
-const myListingClient = () => {
+const myListingClient = ({deletePet}) => {
 
     const [myPets, setMyPets] = useState([]);
 
@@ -35,8 +36,6 @@ const myListingClient = () => {
         fetchData();
 
     }, [email])
-
-    console.log(myPets);
 
 
     return (
@@ -114,13 +113,7 @@ const myListingClient = () => {
                                            
                                             <EditPet pet={pet} user={user} />
 
-                                            <Button
-                                                color="danger" 
-                                                className="w-full flex items-center justify-center gap-1.5 py-2 bg-rose-600 hover:bg-rose-500 text-white font-medium text-sm rounded-full transition cursor-pointer shadow-md shadow-rose-600/10"
-                                            >
-                                                <TrashBin className="size-4" />
-                                                Delete
-                                            </Button>
+                                           <DeletePet pet={pet} deletePet={deletePet}/>
                                         </div>
                                     </div>
                                 </div>

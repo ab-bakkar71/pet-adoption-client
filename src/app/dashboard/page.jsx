@@ -1,6 +1,7 @@
 "use client"
 
 
+import DashBoardListing from '@/components/DashBoardListing';
 import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,7 +23,6 @@ const dashboardPage = () => {
 // for logout
   const handelLogOut = async () => {
           await authClient.signOut();
-  
       }
 
 
@@ -105,8 +105,10 @@ const dashboardPage = () => {
               </div>
             </div>
 
+            <DashBoardListing/>
 
-            <div className="lg:col-span-3 space-y-8">
+
+            {/* <div className="lg:col-span-3 space-y-8">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               </div>
               <div className="rounded-2xl border bg-white border-slate-200 shadow-sm dark:bg-slate-900/40 dark:border-slate-800/80 overflow-hidden">
@@ -115,9 +117,9 @@ const dashboardPage = () => {
                     <h3 className="font-bold text-base text-slate-900 dark:text-white">My Pet Listings</h3>
                     <p className="text-xs text-slate-400 mt-0.5">A list of pets you have put up for adoption.</p>
                   </div>
-                  <button className="text-xs font-semibold text-cyan-500 hover:text-cyan-600 flex items-center gap-1 transition-colors">
+                  <Link href="/dashboard/my-listings" className="text-xs font-semibold text-cyan-500 hover:text-cyan-600 flex items-center gap-1 transition-colors">
                     View All <LuArrowUpRight className="w-3 h-3" />
-                  </button>
+                  </Link>
                 </div>
 
 
@@ -167,7 +169,7 @@ const dashboardPage = () => {
                 </div>
               </div>
 
-            </div>
+            </div> */}
           </div>
 
         </div>

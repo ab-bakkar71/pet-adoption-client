@@ -1,9 +1,10 @@
 import MyListingClient from "@/components/MyListingClient";
+import { deletePet } from "@/lib/action";
 
 const myListingsPage = async() => { 
     return (
         <>
-        <MyListingClient/>
+        <MyListingClient deletePet= {deletePet}/>
         </>
     );
 };
