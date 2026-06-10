@@ -5,6 +5,7 @@ import DashBoardListing from '@/components/DashBoardListing';
 import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { BiLogOut, BiUser } from 'react-icons/bi';
 import { FaPlusCircle } from 'react-icons/fa';
@@ -13,6 +14,7 @@ import { LuArrowUpRight, LuLayoutDashboard, LuListTodo, LuMail, LuMapPin } from 
 import { MdArrowOutward } from 'react-icons/md';
 
 const dashboardPage = () => {
+  const router = useRouter();
 
   // get user
   const userinfo = authClient.useSession();
@@ -22,8 +24,13 @@ const dashboardPage = () => {
 
 // for logout
   const handelLogOut = async () => {
-          await authClient.signOut();
-      }
+    try {
+        await authClient.signOut();
+        router.push('/sign-in'); 
+    } catch (error) {
+        console.error("Logout failed:", error);
+    }
+};
 
 
 
