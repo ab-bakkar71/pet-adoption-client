@@ -9,7 +9,7 @@ export const deletePet = async(id )=>{
     });
     const data = await res.json();
 
-    console.log('after delete', data);
+    // console.log('after delete', data);
     // revalidate cash
     if(data.deletedCount > 0){
     revalidatePath('/dashboard/my-listings')

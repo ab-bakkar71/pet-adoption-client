@@ -17,7 +17,7 @@ const dashboardPage = () => {
   // get user
   const userinfo = authClient.useSession();
   const user = userinfo?.data?.user;
-  console.log(user);
+  // console.log(user);
 
 
 // for logout

@@ -12,7 +12,7 @@ import { CircleLoader } from 'react-spinners';
 const MyAdoptionClient = ({ adoptionCancelAction }) => {
     const [myAdoptions, setMyAdoptions] = useState([]);
     const [loading, setLoading] = useState(true)
-    const router = useRouter()
+    // const router = useRouter()
 
     // get user
     const userinfo = authClient.useSession();
@@ -35,7 +35,8 @@ const MyAdoptionClient = ({ adoptionCancelAction }) => {
 
    const handleCancel = async(id) => {
         await adoptionCancelAction(id);
-        router.push("/dashboard/my-request")
+        // router.push("/dashboard/my-request")
+        window.location.reload();
 
    }
 

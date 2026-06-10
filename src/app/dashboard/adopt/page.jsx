@@ -13,7 +13,7 @@ const adoptPage = () => {
   // get user
       const userinfo = authClient.useSession();
       const user = userinfo?.data?.user;
-      console.log(user);
+      // console.log(user);
 
 
   const onSubmit = async(e)=>{

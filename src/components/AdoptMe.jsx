@@ -1,10 +1,12 @@
 import { adoptionRequest } from '@/lib/data';
 import { Button, Input, Label, Modal, Surface, TextField } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoMdPaw } from 'react-icons/io';
 import { toast } from 'react-toastify';
 
 const AdoptMe = ({ pet, user, isOpen, setIsOpen }) => {
+    const router = useRouter();
 
     const handleAdoption = async (e) => {
         e.preventDefault();
@@ -27,6 +29,8 @@ const AdoptMe = ({ pet, user, isOpen, setIsOpen }) => {
         const result = await adoptionRequest(adoptionData);
         if (result.insertedId) {
             toast.success("Adoption request submitted successfully!")
+            router.push('/dashboard/my-request')
+
         }
 
     }

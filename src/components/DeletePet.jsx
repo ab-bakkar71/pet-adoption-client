@@ -12,7 +12,7 @@ const DeletePet = ({ pet, deletePet }) => {
         toast.error('Pet Deleted Successful!')
         // router.push('/dashboard/my-listings')
         // router.refresh();
-        // window.location.reload();
+        window.location.reload();
         
     }
     return (

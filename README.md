@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pet Adoption Platform
 
-## Getting Started
+A modern pet adoption web application where pet owners can list pets for adoption and adopters can browse, search, filter, and submit adoption requests. The platform provides a complete adoption workflow, including request management, approval, rejection, and pet status tracking.
 
-First, run the development server:
+## Purpose
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The purpose of this project is to connect pet owners with potential adopters through a user-friendly platform. It simplifies the pet adoption process by allowing users to manage pet listings, submit adoption requests, and track adoption statuses efficiently.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live URL
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🌐 Live Site: https://pet-adoption-client-blush.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Client Repository
 
-## Learn More
+🔗 GitHub Repository: https://github.com/ab-bakkar71/pet-adoption-client
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Secure authentication and session management using Better Auth.
+- Add, update, and delete pet listings from the dashboard.
+- Search pets by name, breed, and location.
+- Filter pets by species.
+- Submit adoption requests for available pets.
+- Prevent pet owners from submitting adoption requests for their own pets.
+- Manage adoption requests with accept, reject, and cancel actions.
+- Automatically mark pets as adopted when an adoption request is approved.
+- Protected routes for authenticated users.
+- Responsive design with dark and light mode support.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Technologies Used
 
-## Deploy on Vercel
+- Next.js
+- React
+- MongoDB
+- Tailwind CSS
+- Better Auth
+- HeroUI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## NPM Packages Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Core Packages
+
+- next
+- react
+- react-dom
+- mongodb
+
+### Authentication
+
+- better-auth
+- @better-auth/mongo-adapter
+
+### UI & Styling
+
+- @heroui/react
+- @heroui/styles
+- tailwindcss
+- next-themes
+- animate.css
+
+### Icons
+
+- react-icons
+- @gravity-ui/icons
+- @iconify/react
+
+### Notifications & Loaders
+
+- react-toastify
+- react-spinners
+
+### Development Tools
+
+- eslint
+- eslint-config-next
+- babel-plugin-react-compiler
+- @tailwindcss/postcss
+
+## Future Improvements
+
+- User profile management.
+- Favorite pets functionality.
+- Advanced filtering and sorting.
+- Adoption success stories.
+- Email notifications for adoption requests.
+
+## Author
+
+**Abu Bakkar Siddique**
