@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 
 
-const adoptPage = () => {
+const AdoptPage = () => {
   const router = useRouter();
  
   // get user
@@ -227,4 +227,4 @@ const adoptPage = () => {
   );
 };
 
-export default adoptPage;
+export default AdoptPage;

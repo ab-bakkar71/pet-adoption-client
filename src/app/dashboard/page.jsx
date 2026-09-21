@@ -13,7 +13,7 @@ import { IoListCircle } from 'react-icons/io5';
 import { LuArrowUpRight, LuLayoutDashboard, LuListTodo, LuMail, LuMapPin } from 'react-icons/lu';
 import { MdArrowOutward } from 'react-icons/md';
 
-const dashboardPage = () => {
+const DashboardPage = () => {
   const router = useRouter();
 
   // get user
@@ -185,4 +185,4 @@ const dashboardPage = () => {
   );
 };
 
-export default dashboardPage;
+export default DashboardPage;

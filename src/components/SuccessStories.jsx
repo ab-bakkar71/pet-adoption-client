@@ -46,7 +46,7 @@ const SuccessStories = () => {
                                     <p className='text-slate-600 dark:text-slate-400'>{story.location}</p>
                                 </div>
                             </div>
-                            <p className='text-slate-600 dark:text-slate-400 italic'>" {story.quote} "</p>
+                            <p className='text-slate-600 dark:text-slate-400 italic'>&ldquo;{story.quote}&rdquo;</p>
                         </div>
                     ))
                 }

@@ -14,7 +14,7 @@ const Footer = () => {
                             <IoMdPaw className='text-[#00bd56] -rotate-12' /> <span className='text-gray-900 dark:text-white'>Pet Adoption</span>
                         </Link>
                     <p className="mt-6 text-sm">
-                        Empowering pet adoption across Bangladesh by connecting loving homes with animals in need. Adopt, don't shop.
+                        Empowering pet adoption across Bangladesh by connecting loving homes with animals in need. Adopt, don&apos;t shop.
                     </p>
                 </div>
                 <div className="flex-1 flex items-start md:justify-end gap-20">
