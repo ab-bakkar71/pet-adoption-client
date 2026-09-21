@@ -1,15 +1,17 @@
-"use client"
+"use client";
 
 import { authClient } from '@/lib/auth-client';
 import { Button, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-
-
-const singInPage = () => {
+const SignInPage = () => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -19,28 +21,29 @@ const singInPage = () => {
         const { data, error } = await authClient.signIn.email({
             email: userData.email,
             password: userData.password,
-            callbackURL: "/"
-        })
+            callbackURL: callbackUrl,
+        });
 
         if (error) {
-            toast.error(error.message)
+            toast.error(error.message);
         }
         if (data) {
-            toast.success("Login successful!")
+            toast.success("Login successful!");
+            router.push(callbackUrl);
         }
-    }
+    };
 
     const handleGoogleSignIn = async () => {
-       await authClient.signIn.social({
+        await authClient.signIn.social({
             provider: "google",
-           
+            callbackURL: callbackUrl,
         });
     };
 
     return (
-        <section className='bg-gray-50 dark:bg-slate-900 py-12'>
-            <div className='max-w-lg mx-auto min-h-[80vh] flex justify-center items-center p-4 '>
-                <div className='w-full max-w-md p-6 sm:p-10 md:p-16 border shadow-sm rounded-lg dark:bg-slate-800'>
+        <section className="bg-gray-50 dark:bg-slate-900 py-12">
+            <div className="max-w-lg mx-auto min-h-[80vh] flex justify-center items-center p-4">
+                <div className="w-full max-w-md p-6 sm:p-10 md:p-16 border shadow-sm rounded-lg dark:bg-slate-800">
                     <h1 className="text-center mb-4 text-2xl font-bold">Sign in</h1>
 
                     <Form className="flex flex-col gap-4" onSubmit={handleLogin}>
@@ -79,7 +82,7 @@ const singInPage = () => {
                         </TextField>
 
                         <div className="flex flex-col gap-2 mt-2">
-                            <Button type="submit" className='w-full bg-[#198c19] hover:bg-[#21b121] py-2'>
+                            <Button type="submit" className="w-full bg-[#198c19] hover:bg-[#21b121] py-2">
                                 Sign in
                             </Button>
 
@@ -92,7 +95,7 @@ const singInPage = () => {
                     </Form>
 
                     <p className="text-center mt-6 text-sm">
-                        Don't have an account? <Link href="/signup" className="text-blue-500 underline">Sign Up</Link>
+                        Don&apos;t have an account? <Link href="/signup" className="text-blue-500 underline">Sign Up</Link>
                     </p>
                 </div>
             </div>
@@ -100,4 +103,4 @@ const singInPage = () => {
     );
 };
 
-export default singInPage;
+export default SignInPage;

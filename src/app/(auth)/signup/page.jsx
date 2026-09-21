@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-const SingUpPage = () => {
+const SignUpPage = () => {
     const [passwordValue, setPasswordValue] = useState("");
     const router = useRouter();
 
@@ -138,4 +138,4 @@ const SingUpPage = () => {
     );
 };
 
-export default SingUpPage;
+export default SignUpPage;

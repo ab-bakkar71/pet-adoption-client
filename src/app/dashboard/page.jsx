@@ -26,7 +26,7 @@ const dashboardPage = () => {
   const handelLogOut = async () => {
     try {
         await authClient.signOut();
-        router.push('/sign-in'); 
+        router.push('/signin'); 
     } catch (error) {
         console.error("Logout failed:", error);
     }

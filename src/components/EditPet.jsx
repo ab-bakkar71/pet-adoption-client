@@ -14,22 +14,19 @@ const EditPet = ({ user, pet }) => {
         const formData = new FormData(e.target);
 
         try {
-            const token = localStorage.getItem('token');
-            const updatedPet = await editPet(pet._id, token, formData);
-            
+            const updatedPet = await editPet(pet._id, null, formData);
 
-            if(updatedPet.modifiedCount > 0){
+            if (updatedPet.modifiedCount > 0 || updatedPet.acknowledged) {
                 toast.success("Pet information updated successfully!");
-                // router.push('/dashboard/my-listings')
-                // router.refresh();
-                 window.location.reload();
-            }   
-            
+                router.refresh();
+            } else {
+                toast.info("No changes were made.");
+            }
         } catch (error) {
             console.error('Error updating pet:', error);
-            
+            toast.error("Failed to update pet information");
         }
-    }
+    };
 
 
     return (
@@ -49,7 +46,7 @@ const EditPet = ({ user, pet }) => {
                                 </Modal.Icon>
                                 <Modal.Heading>Edit Pet Information</Modal.Heading>
                                 <p className="mt-1.5 text-sm leading-5 text-muted">
-                                    Fill out the form below and we'll get back to you. The modal adapts automatically
+                                    Fill out the form below and we&apos;ll get back to you. The modal adapts automatically
                                     when the keyboard appears on mobile.
                                 </p>
                             </Modal.Header>
@@ -198,7 +195,7 @@ const EditPet = ({ user, pet }) => {
                                                     <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">Your Email</Label>
                                                     <Input
                                                         type="email"
-                                                        value={user.email}
+                                                        value={user?.email || ""}
                                                         readOnly
                                                         className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed outline-hidden"
                                                     />
@@ -211,7 +208,7 @@ const EditPet = ({ user, pet }) => {
                                                     <Label className="block text-left text-sm font-semibold text-slate-400 dark:text-slate-500">Owner name</Label>
                                                     <Input
                                                         type="text"
-                                                        value={user.name}
+                                                        value={user?.name || ""}
                                                         readOnly
                                                         className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed outline-hidden"
                                                     />
