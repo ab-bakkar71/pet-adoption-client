@@ -5,6 +5,7 @@ import { Check, HeartPulse } from "@gravity-ui/icons";
 import { Chip } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { BiSolidLocationPlus } from "react-icons/bi";
 import { FaCalendarAlt, FaSyringe } from "react-icons/fa";
 import { PiGenderTransgenderFill, PiPawPrintFill } from "react-icons/pi";
@@ -12,31 +13,45 @@ import { TbCurrencyTaka, TbDna2 } from "react-icons/tb";
 
 export const generateMetadata = async ({ params }) => {
     const { petId } = await params;
-    const {token} = await auth.api.getToken({
+    let token = null;
+    try {
+        const tokenRes = await auth.api.getToken({
+            headers: await headers()
+        });
+        token = tokenRes?.token;
+    } catch (e) {}
 
-        headers: await headers()
-    });
     const pet = await getPetById(petId, token);
+
+    if (!pet) {
+        return {
+            title: 'Pet Not Found - Pet Adoption',
+            description: 'The requested pet could not be found.'
+        };
+    }
 
     return {
         title: `${pet.petName} - For Pet Adoption`,
         description: `Learn more about ${pet.petName}, a ${pet.breed} looking for a loving home.`
     };
-}
-
-
+};
 
 const PetIdPage = async ({ params }) => {
     const { petId } = await params;
 
-
-    const {token} = await auth.api.getToken({
-
-        headers: await headers()
-    });
-
+    let token = null;
+    try {
+        const tokenRes = await auth.api.getToken({
+            headers: await headers()
+        });
+        token = tokenRes?.token;
+    } catch (e) {}
 
     const pet = await getPetById(petId, token);
+
+    if (!pet) {
+        notFound();
+    }
 
     return (
         <section className="py-10 bg-gray-50 dark:bg-slate-900 ">

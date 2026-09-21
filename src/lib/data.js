@@ -1,108 +1,181 @@
-// for get all data
-export const getPets = async (search = "") => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/pets?search=${search}`,
-  );
-  const data = await res.json();
-  return data;
+// for get all pets with search and filter
+export const getPets = async (params) => {
+  try {
+    let queryString = "";
+    if (typeof params === "string") {
+      queryString = params.startsWith("?") ? params.slice(1) : params;
+    } else if (params instanceof URLSearchParams) {
+      queryString = params.toString();
+    } else if (params && typeof params === "object") {
+      const searchParams = new URLSearchParams();
+      Object.entries(params).forEach(([key, val]) => {
+        if (val !== undefined && val !== null && val !== "") {
+          searchParams.append(key, val);
+        }
+      });
+      queryString = searchParams.toString();
+    }
+
+    const url = queryString
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}/pets?${queryString}`
+      : `${process.env.NEXT_PUBLIC_BASE_URL}/pets`;
+
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) {
+      return [];
+    }
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Error fetching pets:", error);
+    return [];
+  }
 };
 
-// filter data
-export const getPetsBySpecies = async (species = "all") => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/pets?species=${species}`
-  );
-  const data = await res.json();
-  return data;
-};;
-
-// for feature
-
+// for featured pets
 export const featurePet = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/feature`);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/feature`, {
+      cache: "no-store",
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Error fetching featured pets:", error);
+    return [];
+  }
 };
 
-// for get single data
+// for get single pet
 export const getPetById = async (petId, token) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`, {
-    headers: {
-      authorization: `Bearer ${token}` || "",
-    },
-  });
-  const data = await res.json();
-  return data;
+  try {
+    const headers = {};
+    if (token) {
+      headers.authorization = `Bearer ${token}`;
+    }
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`, {
+      headers,
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching pet by ID:", error);
+    return null;
+  }
 };
 
 // my listing data fetch
 export const myListing = async (email) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/my-listings/${email}`,
-  );
-  const data = await res.json();
-  return data;
+  try {
+    if (!email) return [];
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/my-listings/${email}`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Error fetching my listings:", error);
+    return [];
+  }
 };
 
 // edit pet data fetch
 export const editPet = async (petId, token, formData) => {
-  const petData = Object.fromEntries(formData.entries());
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`, {
-    method: "PATCH",
-    headers: {
+  try {
+    const petData = Object.fromEntries(formData.entries());
+    const headers = {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}` || "",
-    },
-    body: JSON.stringify(petData),
-  });
-  const data = await res.json();
-  return data;
+    };
+    if (token) {
+      headers.authorization = `Bearer ${token}`;
+    }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/pets/${petId}`, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(petData),
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error editing pet:", error);
+    return { success: false, message: error.message };
+  }
 };
 
 // adoption data fetch
 export const adoptionRequest = async (adoptionData) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-request`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-request`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(adoptionData),
       },
-      body: JSON.stringify(adoptionData),
-    },
-  );
-  const data = await res.json();
-  return data;
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error submitting adoption request:", error);
+    return { success: false, message: error.message };
+  }
 };
 
-// get adoption request by user id
+// get adoption request by pet id
 export const getAdoptionRequestsByPetId = async (petId) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/pet/${petId}`,
-  );
-
-  const data = await res.json();
-  return data;
+  try {
+    if (!petId) return [];
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/pet/${petId}`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Error fetching adoption requests by pet id:", error);
+    return [];
+  }
 };
 
 // get adoption request by user email
 export const getAdoptionRequestByEmail = async (email) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/user/${email}`,
-  );
-  const data = await res.json();
-  return data;
+  try {
+    if (!email) return [];
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-requests/user/${email}`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Error fetching adoption requests by email:", error);
+    return [];
+  }
 };
 
 // accept or reject adoption request by id
 export const updateAdoptionRequestStatus = async (Id) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-request/${Id}`,
-    {
-      method: "PATCH",
-    },
-  );
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/adoption-request/${Id}`,
+      {
+        method: "PATCH",
+      },
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating adoption request status:", error);
+    return { success: false, message: error.message };
+  }
 };
